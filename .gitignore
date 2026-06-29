@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/images/ali_interview.mp4
+public/images/ruh-interview.mp4
