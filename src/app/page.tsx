@@ -176,7 +176,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                 <video
                   id="video1"
-                  src="/images/ruh-interview.mp4"
+                  src=""
                   className="absolute inset-0 w-full h-full object-cover"
                   playsInline
                   controls
@@ -219,7 +219,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                 <video
                   id="video2"
-                  src="/images/ali_interview.mp4"
+                  src=""
                   className="absolute inset-0 w-full h-full object-cover"
                   playsInline
                   controls
