@@ -3,16 +3,6 @@ export const runtime = "nodejs";
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: true, // true for port 465
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
-
 interface RegistrationData {
   participantName: string;
   schoolName?: string;
@@ -29,6 +19,32 @@ interface RegistrationData {
 
 export async function POST(req: Request) {
   try {
+    // Validate env vars are present
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpPort = process.env.SMTP_PORT;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+    const toEmail = process.env.TO_EMAIL;
+
+    if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !toEmail) {
+      console.error("Missing SMTP env vars:", { smtpHost, smtpPort, smtpUser, toEmail });
+      return NextResponse.json(
+        { success: false, error: "Email configuration is missing on the server." },
+        { status: 500 }
+      );
+    }
+
+    // Create transporter fresh per request so env vars are always resolved
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: Number(smtpPort),
+      secure: true, // true for port 465
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    });
+
     const data: RegistrationData = await req.json();
 
     const {
@@ -46,8 +62,8 @@ export async function POST(req: Request) {
     } = data;
 
     await transporter.sendMail({
-      from: `"WiserKids Registration" <${process.env.SMTP_USER}>`,
-      to: process.env.TO_EMAIL,
+      from: `"WiserKids Registration" <${smtpUser}>`,
+      to: toEmail,
       subject: `New Registration — ${participantName}`,
       html: `
         <h2>New WiserKids Registration</h2>
