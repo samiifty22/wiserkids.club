@@ -219,7 +219,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                 <video
                   id="video2"
-                  src=""
+                  src="/images/ali_interview.mp4"
                   className="absolute inset-0 w-full h-full object-cover"
                   playsInline
                   controls
