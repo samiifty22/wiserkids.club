@@ -162,7 +162,7 @@ export default function Home() {
                 So excited for my son! He just joined WiserKids, an amazing program for 6-12 year olds that goes beyond school textbooks. He will be learning real-world skills like financial literacy, critical thinking, and emotional intelligence. Can't wait to see him grow!
               </p>
               <div className="flex items-center gap-3 mt-4">
-                <div className="flex-1 text-[10px] leading-tight font-bold text-gray-500">Muhammad Belayet<br />Chowdhury</div>
+                <div className="flex-1 text-[10px] leading-tight font-bold text-gray-500">Muhammad Refayet<br />Chowdhury</div>
                 <div className="w-8 h-8 bg-gray-200 rounded-md flex-shrink-0">
                   {/* PASTE AVATAR 1 IMAGE PATH BELOW */}
                   <img src="" width={32} height={32} className="rounded-md" alt="Avatar" />
@@ -206,7 +206,7 @@ export default function Home() {
                 So excited for my son! He just joined WiserKids, an amazing program for 6-12 year olds that goes beyond school textbooks. He will be learning real-world skills like financial literacy, critical thinking, and emotional intelligence. Can't wait to see him grow!
               </p>
               <div className="flex items-center gap-3 mt-4">
-                <div className="flex-1 text-[10px] leading-tight font-bold text-gray-500">Muhammad Belayet<br />Chowdhury</div>
+                <div className="flex-1 text-[10px] leading-tight font-bold text-gray-500">Muhammad Refayet<br />Chowdhury</div>
                 <div className="w-8 h-8 bg-gray-200 rounded-md flex-shrink-0">
                   {/* PASTE AVATAR 2 IMAGE PATH BELOW */}
                   <img src="" width={32} height={32} className="rounded-md" alt="Avatar" />
