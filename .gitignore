@@ -41,3 +41,4 @@ yarn-error.log*
 next-env.d.ts
 public/images/ali_interview.mp4
 public/images/ruh-interview.mp4
+.vercel
