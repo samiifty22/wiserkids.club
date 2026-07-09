@@ -33,7 +33,11 @@ export default function OrderPage() {
         >
           <h2 className="text-xl font-extrabold text-[#192A4B]">Order Summary</h2>
           <div className="flex gap-4 items-center">
-            <div className="w-20 h-24 rounded-lg bg-gradient-to-br from-[#606F72] to-[#192A4B] flex-shrink-0 shadow-sm" />
+            <img
+              src="/images/mock up PNG 2.png"
+              alt="WiserKids Handbook — Financial Literacy for Smart Kids"
+              className="w-20 h-24 object-contain flex-shrink-0"
+            />
             <div>
               <h3 className="font-extrabold text-[#192A4B] leading-tight">WiserKids Handbook</h3>
               <p className="text-xs text-[#606F72] mt-1">Being Financially Smart, Creative &amp; Entrepreneurial</p>

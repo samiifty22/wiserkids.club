@@ -253,7 +253,7 @@ export default function ParentForm() {
           transition={{ type: "spring", stiffness: 400, damping: 15 }}
           type="submit"
           disabled={status === "loading"}
-          className="bg-gradient-to-b from-[#FFCE66] to-[#F9BF3F] hover:to-[#eeae2e] text-[#192A4B] font-bold py-3.5 px-14 rounded-full transition-all duration-200 disabled:opacity-50 shadow-[0_8px_20px_-6px_rgba(249,191,63,0.6)] hover:shadow-[0_10px_24px_-6px_rgba(249,191,63,0.7)]"
+          className="bg-[#F9BF3F] hover:bg-[#e8ac28] text-white font-bold py-3.5 px-14 rounded-full transition-all duration-200 disabled:opacity-50 shadow-[0_8px_20px_-6px_rgba(249,191,63,0.6)] hover:shadow-[0_10px_24px_-6px_rgba(249,191,63,0.7)]"
         >
           {status === "loading" ? "Submitting..." : "Submit Registration"}
         </motion.button>

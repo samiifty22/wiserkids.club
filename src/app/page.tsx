@@ -37,7 +37,7 @@ const btnPress = {
 };
 
 const primaryBtn =
-  "bg-gradient-to-b from-[#FFCE66] to-[#F9BF3F] hover:to-[#eeae2e] text-[#192A4B] font-bold rounded-full shadow-[0_8px_20px_-6px_rgba(249,191,63,0.6)] hover:shadow-[0_10px_24px_-6px_rgba(249,191,63,0.7)] transition-all duration-200";
+  "bg-[#F9BF3F] hover:bg-[#e8ac28] text-white font-bold rounded-full shadow-[0_8px_20px_-6px_rgba(249,191,63,0.6)] hover:shadow-[0_10px_24px_-6px_rgba(249,191,63,0.7)] transition-all duration-200";
 
 const secondaryBtnLight =
   "bg-white border-2 border-[#606F72]/30 text-[#606F72] hover:border-[#192A4B] hover:text-[#192A4B] font-bold rounded-full transition-colors duration-200";
@@ -57,9 +57,9 @@ export default function Home() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="pt-6 px-4 sm:px-6 max-w-7xl mx-auto"
+        className="w-full bg-white border-b border-gray-200"
       >
-        <header className="bg-white rounded-full px-4 sm:px-8 py-3 flex items-center justify-between shadow-sm border border-gray-200">
+        <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center">
             <img
               src="/images/logo-nav.png"
@@ -72,47 +72,61 @@ export default function Home() {
             onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
             className={`${primaryBtn} text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5`}
           >
-            Start Your Journey
+            Start Your Wiser Journey
           </motion.button>
         </header>
       </motion.div>
 
       {/* Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-6 pt-16 sm:pt-20 pb-24 grid lg:grid-cols-2 gap-12 items-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="relative z-10 space-y-6 sm:space-y-8 pr-0 lg:pr-12 text-center lg:text-left"
-        >
-          <motion.h1 variants={fadeInUp} className="text-4xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#192A4B]">
-            Being Financially Smart, Creative &amp; Entrepreneurial
-          </motion.h1>
-          <motion.p variants={fadeInUp} className="text-base sm:text-lg text-[#606F72] leading-relaxed max-w-lg mx-auto lg:mx-0">
-            Wiser Kids gives children a warm, engaging, and supportive learning experience designed to strengthen not only what they know, but how they think, feel, and grow.
-          </motion.p>
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-            <motion.button
-              {...btnPress}
-              onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
-              className={`${primaryBtn} px-8 py-3 w-full sm:w-auto`}
-            >
-              Join Wiser Kids
-            </motion.button>
-            <motion.button {...btnPress} className={`${secondaryBtnLight} px-8 py-3 text-sm w-full sm:w-auto`}>
-              Let&apos;s Explore
-            </motion.button>
+      <section className="relative overflow-hidden pt-16 sm:pt-20 pb-24 lg:pb-24">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="relative z-10 space-y-6 sm:space-y-8 pr-0 lg:pr-12 text-center lg:text-left"
+          >
+            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#192A4B]">
+              Being Financially Smart, Creative &amp; Entrepreneurial
+            </motion.h1>
+            <motion.p variants={fadeInUp} className="text-base sm:text-lg text-[#606F72] leading-relaxed max-w-lg mx-auto lg:mx-0">
+              WiserKids gives children a warm, engaging, and supportive learning experience designed to strengthen not only what they know, but how they think, feel, and grow.
+            </motion.p>
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
+              <motion.button
+                {...btnPress}
+                onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
+                className={`${primaryBtn} px-8 py-3 w-full sm:w-auto`}
+              >
+                Join Wiser Kids
+              </motion.button>
+              <motion.button {...btnPress} className={`${secondaryBtnLight} px-8 py-3 text-sm w-full sm:w-auto`}>
+                Let&apos;s Explore
+              </motion.button>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none lg:relative lg:pointer-events-auto lg:flex lg:justify-end"
-        >
-          <img src="/images/hero-section.png" alt="Hero Illustration" width={600} height={600} className="object-contain w-full max-w-md aspect-square opacity-10 lg:opacity-100" />
-        </motion.div>
+          {/* Desktop: illustration column, anchored right next to the text via the grid gap, tall enough to extend well down the page */}
+          <div className="hidden lg:block relative h-[46rem]">
+            <motion.img
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              src="/images/Hero-section-Png.png"
+              alt="Hero Illustration"
+              className="absolute inset-y-0 left-0 h-full w-auto max-w-none object-contain"
+            />
+          </div>
+        </div>
+
+        {/* Mobile: faint background illustration (unchanged) */}
+        <img
+          src="/images/hero-section.png"
+          alt="Hero Illustration"
+          width={600}
+          height={600}
+          className="absolute inset-0 z-0 w-full h-full object-contain opacity-10 pointer-events-none lg:hidden"
+        />
       </section>
 
       {/* Why WiserKids Section */}
@@ -130,49 +144,44 @@ export default function Home() {
               Children grow best when they feel supported, interested, and understood. Wiser Kids is designed to help learning feel more personal, more connected, and more aligned with the way children actually develop.
             </p>
           </motion.div>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-5xl mx-auto px-6"
+        >
+          <motion.div
+            variants={fadeInUp}
+            className="rounded-3xl border border-gray-100 shadow-sm bg-white p-8 sm:p-12 grid lg:grid-cols-2 gap-10 items-center"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#192A4B] leading-tight text-center lg:text-left">
+              Subjects Covered
+              <br className="hidden sm:block" /> In WiserKids
+            </h2>
 
-          <div className="grid sm:grid-cols-2 gap-6">
-            {/* Card 1 */}
-            <motion.div variants={fadeInUp} className="bg-white rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-8 h-8 bg-[#192A4B] rounded-md flex items-center justify-center text-white">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" /></svg>
-              </div>
-              <h3 className="font-extrabold text-lg text-[#192A4B]">Personal attention that makes a difference</h3>
-              <p className="text-[#606F72] text-sm leading-relaxed">
-                Children need more than instruction. They need to feel seen. Wiser Kids is built around care, connection, and the kind of attention that helps children grow with confidence.
-              </p>
-            </motion.div>
-            {/* Card 2 */}
-            <motion.div variants={fadeInUp} className="bg-white rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-8 h-8 bg-[#192A4B] rounded-md flex items-center justify-center text-white">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-              </div>
-              <h3 className="font-extrabold text-lg text-[#192A4B]">Learning that feels meaningful</h3>
-              <p className="text-[#606F72] text-sm leading-relaxed">
-                Children engage more deeply when learning feels connected, active, and relevant. We focus on helping learning feel alive, not just completed.
-              </p>
-            </motion.div>
-            {/* Card 3 */}
-            <motion.div variants={fadeInUp} className="bg-white rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-8 h-8 bg-[#192A4B] rounded-md flex items-center justify-center text-white">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg>
-              </div>
-              <h3 className="font-extrabold text-lg text-[#192A4B]">Growth beyond academics</h3>
-              <p className="text-[#606F72] text-sm leading-relaxed">
-                We care about strong learning foundations, but we also care about confidence, communication, emotional development, and the habits that help children thrive.
-              </p>
-            </motion.div>
-            {/* Card 4 */}
-            <motion.div variants={fadeInUp} className="bg-white rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-8 h-8 bg-[#192A4B] rounded-md flex items-center justify-center text-white">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16z" clipRule="evenodd" /><path d="M7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" fillRule="evenodd" /></svg>
-              </div>
-              <h3 className="font-extrabold text-lg text-[#192A4B]">Support parents can actually feel</h3>
-              <p className="text-[#606F72] text-sm leading-relaxed">
-                Children engage more deeply when learning feels connected, active, and relevant. We focus on helping learning feel alive, not just completed.
-              </p>
-            </motion.div>
-          </div>
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+              {[
+                { label: "Finance & Business", bg: "#F9BF3F" },
+                { label: "Learning to Learn", bg: "#606F72" },
+                { label: "Values & Communication", bg: "#192A4B" },
+                { label: "Economics", bg: "#F9BF3F" },
+                { label: "Technology & AI", bg: "#606F72" },
+                { label: "History & Stories", bg: "#192A4B" },
+              ].map((subject) => (
+                <motion.span
+                  key={subject.label}
+                  whileHover={{ rotate: [0, -4, 4, -4, 0], scale: 1.06 }}
+                  transition={{ duration: 0.4 }}
+                  style={{ backgroundColor: subject.bg }}
+                  className="inline-flex items-center px-5 sm:px-6 py-3 rounded-full text-sm sm:text-base font-bold text-white shadow-sm cursor-default whitespace-nowrap"
+                >
+                  {subject.label}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -385,24 +394,17 @@ export default function Home() {
           className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
         >
           {/* Book / Handbook Mockup */}
-          <motion.div variants={fadeInUp} className="flex justify-center order-2 lg:order-1">
-            <motion.div
+          <motion.div variants={fadeInUp} className="flex justify-center order-1">
+            <motion.img
               whileHover={{ scale: 1.02 }}
-              className="relative w-64 sm:w-80 aspect-[3/4] rounded-2xl shadow-2xl overflow-hidden bg-gradient-to-br from-[#606F72] to-[#192A4B] p-6 flex flex-col justify-between"
-            >
-              {/* To use a real cover, replace this mockup with:
-                  <img src="/images/book-cover.png" alt="WiserKids Handbook" className="absolute inset-0 w-full h-full object-cover" /> */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#F9BF3F]" />
-              <div className="text-white/80 text-xs font-bold tracking-widest uppercase pt-3">WiserKids Handbook</div>
-              <div className="text-white font-extrabold text-2xl sm:text-3xl leading-tight">
-                Being Financially Smart, Creative &amp; Entrepreneurial
-              </div>
-              <span className="text-white/70 text-[10px] font-bold">A Guide for Growing Minds</span>
-            </motion.div>
+              src="/images/Financial Literracy for smart kids mock up PNG 3.png"
+              alt="Financial Literacy for Smart Kids — WiserKids Handbook"
+              className="w-64 sm:w-80 h-auto object-contain drop-shadow-2xl"
+            />
           </motion.div>
 
           {/* Text Content */}
-          <div className="order-1 lg:order-2 text-center lg:text-left space-y-6">
+          <div className="order-2 text-center lg:text-left space-y-6">
             <motion.p variants={fadeInUp} className="text-[#F9BF3F] text-xs font-bold uppercase tracking-widest">
               The WiserKids Handbook
             </motion.p>
@@ -489,7 +491,7 @@ export default function Home() {
       </section>
 
       {/* Let's Explore Section */}
-      <section className="bg-[#606F72] py-16 sm:py-24">
+      <section className="bg-[#192A4B] py-16 sm:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
