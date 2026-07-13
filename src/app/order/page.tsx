@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import CheckoutForm from "@/components/CheckoutForm";
 
 const UNIT_PRICE = 955;
@@ -9,19 +10,7 @@ const UNIT_PRICE = 955;
 export default function OrderPage() {
   return (
     <div className="min-h-screen bg-white text-[#192A4B]">
-      <div className="pt-6 px-4 sm:px-6 max-w-7xl mx-auto">
-        <header className="bg-white rounded-full px-4 sm:px-8 py-3 flex items-center justify-between shadow-sm border border-gray-200">
-          <Link href="/" className="flex items-center">
-            <img src="/images/logo-nav.png" alt="WiserKids" className="h-8 sm:h-10 w-auto object-contain" />
-          </Link>
-          <Link
-            href="/"
-            className="text-xs sm:text-sm font-bold text-[#606F72] hover:text-[#192A4B] transition-colors"
-          >
-            ← Back to home
-          </Link>
-        </header>
-      </div>
+      <Header />
 
       <section className="max-w-5xl mx-auto px-6 py-12 sm:py-20 grid lg:grid-cols-2 gap-10 items-start">
         {/* Order Summary */}
@@ -60,6 +49,8 @@ export default function OrderPage() {
           <CheckoutForm />
         </motion.div>
       </section>
+
+      <Footer />
     </div>
   );
 }

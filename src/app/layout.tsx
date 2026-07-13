@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
+const jost = Jost({
   weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ["latin"],
 });
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${poppins.className} antialiased`}>
+      <body className={`${jost.className} antialiased`}>
         {children}
       </body>
     </html>

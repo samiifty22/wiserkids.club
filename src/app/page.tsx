@@ -1,11 +1,44 @@
 "use client";
 
 import { useState } from "react";
-import ParentForm from "@/components/ParentForm";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { fadeInUp, staggerContainer, btnPress, primaryBtn, secondaryBtnLight, secondaryBtnDark } from "@/lib/theme";
 
-const YOUTUBE_VIDEO_ID = "0iRbD5rM5qc";
+const YOUTUBE_VIDEO_ID = "8Ed1X_2A9oU";
+
+const faqs = [
+  {
+    q: "What is WiserKids?",
+    a: "WiserKids is a future-focused learning program designed for children aged 6-12. It goes beyond traditional education by teaching financial literacy, critical thinking, communication skills, and real-world problem-solving in a fun and engaging way.",
+  },
+  {
+    q: "What makes WiserKids different from regular after-school programs?",
+    a: "Unlike traditional programs that focus mainly on academics, WiserKids focuses on life skills. We prepare children for the real world by helping them understand money, think independently, communicate confidently, and develop an entrepreneurial mindset.",
+  },
+  {
+    q: "How are the classes conducted?",
+    a: "Classes are highly interactive and activity-based. We use games, simulations, discussions, and real-life scenarios instead of boring lectures or memorization.",
+  },
+  {
+    q: "What is FinDay?",
+    a: "FinDay is a special WiserKids workshop where children experience money through fun challenges, games, and real-life simulations. It's designed to make financial literacy practical and exciting.",
+  },
+  {
+    q: "At what age should children start learning financial literacy?",
+    a: "Children can start learning basic money concepts as early as 5 years old. At WiserKids, we simplify complex ideas so kids can understand and apply them in everyday life.",
+  },
+  {
+    q: "Will this help my child academically?",
+    a: "Yes. While WiserKids is not a traditional academic program, it improves thinking skills, communication, and confidence, which positively impact overall academic performance.",
+  },
+  {
+    q: "How does WiserKids benefit my child in the long run?",
+    a: "WiserKids helps children become confident, independent thinkers who understand money, make smart decisions, and are better prepared for the future.",
+  },
+];
 
 function DotGrid({ className }: { className?: string }) {
   return (
@@ -17,65 +50,14 @@ function DotGrid({ className }: { className?: string }) {
   );
 }
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const btnPress = {
-  whileHover: { scale: 1.04, y: -3 },
-  whileTap: { scale: 0.96, y: 0 },
-  transition: { type: "spring" as const, stiffness: 400, damping: 15 },
-};
-
-const primaryBtn =
-  "bg-[#F9BF3F] hover:bg-[#e8ac28] text-white font-bold rounded-full shadow-[0_8px_20px_-6px_rgba(249,191,63,0.6)] hover:shadow-[0_10px_24px_-6px_rgba(249,191,63,0.7)] transition-all duration-200";
-
-const secondaryBtnLight =
-  "bg-white border-2 border-[#606F72]/30 text-[#606F72] hover:border-[#192A4B] hover:text-[#192A4B] font-bold rounded-full transition-colors duration-200";
-
-const secondaryBtnDark =
-  "bg-transparent border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 font-bold rounded-full transition-colors duration-200";
-
 export default function Home() {
   const router = useRouter();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-white text-[#192A4B] selection:bg-[#192A4B] selection:text-white overflow-hidden">
-
-      {/* Header Container */}
-      <motion.div
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full bg-white border-b border-gray-200"
-      >
-        <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center">
-            <img
-              src="/images/logo-nav.png"
-              alt="WiserKids"
-              className="h-8 sm:h-10 w-auto object-contain"
-            />
-          </div>
-          <motion.button
-            {...btnPress}
-            onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
-            className={`${primaryBtn} text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5`}
-          >
-            Start Your Wiser Journey
-          </motion.button>
-        </header>
-      </motion.div>
+      <Header />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-16 sm:pt-20 pb-24 lg:pb-24">
@@ -90,12 +72,12 @@ export default function Home() {
               Being Financially Smart, Creative &amp; Entrepreneurial
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-base sm:text-lg text-[#606F72] leading-relaxed max-w-lg mx-auto lg:mx-0">
-              WiserKids gives children a warm, engaging, and supportive learning experience designed to strengthen not only what they know, but how they think, feel, and grow.
+              Our mission is to bring transformational change in children by giving them a learning journey that provides financial wisdom, creative space and entrepreneurial spirit.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
               <motion.button
                 {...btnPress}
-                onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => router.push("/admission")}
                 className={`${primaryBtn} px-8 py-3 w-full sm:w-auto`}
               >
                 Join Wiser Kids
@@ -144,13 +126,16 @@ export default function Home() {
               Children grow best when they feel supported, interested, and understood. Wiser Kids is designed to help learning feel more personal, more connected, and more aligned with the way children actually develop.
             </p>
           </motion.div>
+
+
         </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-5xl mx-auto px-6"
+          className="max-w-5xl mx-auto px-6 mt-6 sm:mt-8"
         >
           <motion.div
             variants={fadeInUp}
@@ -220,7 +205,7 @@ export default function Home() {
               Get Financially Literate
             </h2>
             <p className="text-white/70 leading-relaxed text-sm sm:text-base max-w-lg mx-auto lg:mx-0">
-              Every kit, every book, every session is designed to turn pocket money into powerful lessons. From hands-on starter kits to real workshops with real kids, WiserKids makes financial literacy something children actually enjoy — and remember.
+              Every kit, every book, every session is designed to turn pocket money into powerful lessons. From hands-on starter kits to real workshops with real kids, WiserKids makes financial literacy something children actually enjoy and remember.
             </p>
             <div className="pt-2">
               <motion.button
@@ -251,7 +236,7 @@ export default function Home() {
               Children feel supported when parents do too
             </h2>
             <p className="text-white/70 leading-relaxed text-sm sm:text-base max-w-lg mx-auto lg:mx-0">
-              Wiser Kids is built to give parents a stronger sense of clarity, connection, and confidence in their child&apos;s learning journey.
+              WiserKids is built to give parents a stronger sense of clarity, connection, and confidence in their child&apos;s learning journey.
             </p>
             <div className="pt-2">
               <motion.button
@@ -273,7 +258,7 @@ export default function Home() {
 
             <motion.div
               whileHover={{ scale: 1.01 }}
-              className="relative z-10 w-full max-w-md aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black"
+              className="relative z-10 w-full max-w-xs sm:max-w-sm aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl bg-black"
             >
               {isVideoPlaying ? (
                 <iframe
@@ -293,7 +278,7 @@ export default function Home() {
                   <img
                     src={`https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/hqdefault.jpg`}
                     alt="WiserKids Story thumbnail"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-contain"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                   <span className="absolute inset-0 flex items-center justify-center">
@@ -333,8 +318,17 @@ export default function Home() {
               Financial Literacy<br className="hidden sm:block" /> Courses
             </h2>
             <p className="text-[#606F72] leading-relaxed text-sm sm:text-base max-w-md mx-auto lg:mx-0">
-              Earn it. Save it. Grow it. Give your child the confidence to think smarter about money — one fun, hands-on lesson at a time.
+              Earn it. Save it. Grow it. Give your child the confidence to think smarter about money one fun, hands-on lesson at a time.
             </p>
+            <div className="pt-2">
+              <motion.button
+                {...btnPress}
+                onClick={() => router.push("/programs")}
+                className={`${secondaryBtnLight} px-8 py-3 text-sm`}
+              >
+                See All Programs
+              </motion.button>
+            </div>
           </motion.div>
 
           {/* Offer Cards */}
@@ -346,14 +340,14 @@ export default function Home() {
               className="bg-[#606F72] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between min-h-[260px] transition-transform"
             >
               <div>
-                <h3 className="text-white font-extrabold text-xl mb-3">Fin Day</h3>
+                <h3 className="text-white font-extrabold text-xl mb-3">FinDay</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
                   A single, action-packed day introducing kids to money, budgeting, and big ideas — the perfect first taste of financial literacy.
                 </p>
               </div>
               <motion.button
                 {...btnPress}
-                onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => router.push("/admission")}
                 className={`mt-6 ${primaryBtn} text-sm py-3 w-full`}
               >
                 Register
@@ -374,7 +368,7 @@ export default function Home() {
               </div>
               <motion.button
                 {...btnPress}
-                onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => router.push("/admission")}
                 className={`mt-6 ${primaryBtn} text-sm py-3 w-full`}
               >
                 Join Now
@@ -420,7 +414,7 @@ export default function Home() {
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
               <motion.button
                 {...btnPress}
-                onClick={() => router.push("/order")}
+                onClick={() => router.push("/store")}
                 className={`${primaryBtn} px-8 py-3 w-full sm:w-auto`}
               >
                 Order Now
@@ -437,28 +431,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Registration Form Section */}
-      <section id="register" className="bg-[#192A4B] py-16 sm:py-24 border-t border-white/10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="max-w-4xl mx-auto px-6"
-        >
-          <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-12 space-y-3">
-            <p className="text-[#F9BF3F] text-xs font-bold uppercase tracking-widest">Save Your Child&apos;s Spot</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Registration Form</h2>
-            <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto">
-              Fill in a few details below and our team will reach out to confirm the next steps.
-            </p>
-          </motion.div>
-          <motion.div variants={fadeInUp}>
-            <ParentForm />
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* FAQ Section */}
       <section className="bg-white py-16 sm:py-24">
         <motion.div
@@ -470,22 +442,47 @@ export default function Home() {
         >
           <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl font-extrabold text-center mb-8 sm:mb-12 text-[#192A4B]">FAQ</motion.h2>
           <div className="space-y-4">
-            {[
-              "Is Wiser Kids right for my child?",
-              "How does the learning experience work?",
-              "How involved do parents need to be?",
-              "How do you support different learners?",
-              "What happens after I book a call?"
-            ].map((question, i) => (
-              <motion.div
-                variants={fadeInUp}
-                key={i}
-                className="bg-white rounded-full px-6 sm:px-8 py-4 flex justify-between items-center cursor-pointer shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-[0.98]"
-              >
-                <span className="font-medium text-[#192A4B] text-xs sm:text-sm">{question}</span>
-                <span className="text-xl sm:text-2xl font-light text-[#606F72]">+</span>
-              </motion.div>
-            ))}
+            {faqs.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <motion.div
+                  variants={fadeInUp}
+                  key={i}
+                  className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className="w-full flex justify-between items-center gap-4 px-6 sm:px-8 py-4 sm:py-5 text-left active:scale-[0.99] transition-transform"
+                  >
+                    <span className="font-bold text-[#192A4B] text-xs sm:text-sm">{faq.q}</span>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="text-xl sm:text-2xl font-light text-[#606F72] flex-shrink-0 leading-none"
+                    >
+                      +
+                    </motion.span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 sm:px-8 pb-5 sm:pb-6 text-[#606F72] text-xs sm:text-sm leading-relaxed">
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </section>
@@ -508,7 +505,7 @@ export default function Home() {
             whileHover={{ scale: 1.04, y: -3 }}
             whileTap={{ scale: 0.96, y: 0 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => router.push("/admission")}
             className={`${primaryBtn} px-8 py-3 inline-block mt-4 w-full sm:w-auto`}
           >
             Book a call
@@ -516,102 +513,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-white pt-16 pb-8 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-
-            {/* Logo + Tagline + Social */}
-            <div className="space-y-4 col-span-2">
-              <div className="flex items-center">
-                <img
-                  src="/images/logo-footer.png"
-                  alt="WiserKids"
-                  className="h-30 w-auto object-contain"
-                />
-              </div>
-              <p className="text-xs font-bold text-[#192A4B] max-w-xs leading-relaxed">
-                Being Financially Smart, Creative &amp;<br />Entrepreneurial
-              </p>
-              <p className="text-xs text-[#606F72] max-w-xs leading-relaxed">
-                Empowering the next generation of thinkers, earners, and leaders — one child at a time.
-              </p>
-              {/* Social Icons */}
-              <div className="flex items-center gap-3 pt-2">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#192A4B] transition-colors group">
-                  <svg className="w-4 h-4 text-[#606F72] group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                  </svg>
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#192A4B] transition-colors group">
-                  <svg className="w-4 h-4 text-[#606F72] group-hover:text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                  </svg>
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#192A4B] transition-colors group">
-                  <svg className="w-4 h-4 text-[#606F72] group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
-                  </svg>
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#192A4B] transition-colors group">
-                  <svg className="w-4 h-4 text-[#606F72] group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-extrabold text-[#192A4B] mb-4 sm:mb-6 text-sm">Quick Links</h4>
-              <ul className="space-y-3 text-xs font-bold text-[#606F72]">
-                <li><a href="#" className="hover:text-[#192A4B] transition-colors">Home</a></li>
-                <li><a href="#" className="hover:text-[#192A4B] transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-[#192A4B] transition-colors">How it Works</a></li>
-                <li><a href="#" className="hover:text-[#192A4B] transition-colors">Program</a></li>
-                <li><a href="#" className="hover:text-[#192A4B] transition-colors">Contact</a></li>
-              </ul>
-            </div>
-
-            {/* Legal + Contact */}
-            <div className="space-y-8">
-              <div>
-                <h4 className="font-extrabold text-[#192A4B] mb-4 sm:mb-6 text-sm">Legal</h4>
-                <ul className="space-y-3 text-xs font-bold text-[#606F72]">
-                  <li><a href="#" className="hover:text-[#192A4B] transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-[#192A4B] transition-colors">Terms of Service</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-extrabold text-[#192A4B] mb-4 text-sm">Contact</h4>
-                <ul className="space-y-3 text-xs font-bold text-[#606F72]">
-                  <li>
-                    <a href="mailto:info@wiserkids.club" className="hover:text-[#192A4B] transition-colors">
-                      info@wiserkids.club
-                    </a>
-                  </li>
-                  <li className="text-[#606F72] font-medium">Dhaka, Bangladesh</li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <p className="text-[10px] font-bold text-[#606F72]">© 2026 WiserKids. All rights reserved.</p>
-            <p className="text-[10px] text-[#606F72]/70">Built for curious kids and confident parents.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
